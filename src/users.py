@@ -9,7 +9,7 @@ class User:
         self.profiles = {} # call load profile, read from json to poplate dict of profile_name,engine_profile objs, empty dict if json is empty
 
     def load_profiles(self):
-        pass
+        passz
 
     def save_profiles(self):
         pass
