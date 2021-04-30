@@ -2,6 +2,9 @@
 import tkinter as tk
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfilename #used for uploading file
+import users
+
+file_path = ' '
 
 # MENU1 IS THE MAIN MENU
 class Menu1:
@@ -100,12 +103,14 @@ class Menu3:
     def open_file(self):
         file_name = askopenfilename()   # = askopenfile(mode = 'r', filetypes = [('xlsx Files', '*.xlsx')])
         if file_name is not None:
-            #content = file_name.read() # this is where we will call menu to process data and store in db
-            print(file_name)
+            global file_path 
+            file_path = file_name # this is where we will call menu to process data and store in db
+            
         
     # FOR CLOSING WINDOW
     def quit(self):
         self.master.destroy()
+        # call new_profile with the file name 
 
 # MAIN PROGRAM LOOP
 def main():
