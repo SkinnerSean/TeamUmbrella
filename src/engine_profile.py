@@ -22,8 +22,5 @@ class EngineProfile:
         df['Prop Slip [% Slip]'] = df['Prop Slip [% Slip]'].apply(normalize)
         return df
 
-    def new_race(self):
-        pass
-
     def key_stats(self):
         return self.df.loc[self.df['GPS_Speed [mph]'] == self.df['GPS_Speed [mph]'].max()]
