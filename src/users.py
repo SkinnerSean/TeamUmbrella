@@ -1,8 +1,10 @@
 import engine_profile
+import sqlite3
 
 class Admin:
     def __init__(self):
         pass
+
 
 class User:
     def __init__(self):
@@ -10,12 +12,14 @@ class User:
 
 
     def load_profiles(self):
-        passz
+        pass
 
     def save_profiles(self):
         pass
 
     def new_profile(self,name):
+        #call process file
+        #upload proccessed file into db
         pass
 
     def del_profile(self,name):
