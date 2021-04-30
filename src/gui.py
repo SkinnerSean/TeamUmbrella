@@ -85,6 +85,7 @@ class Menu3:
         self.l1 = tk.Label(self.frame, text = "Username:")
         self.l2 = tk.Label(self.frame, text = "Engine Profile Name:")
         self.l3 = tk.Label(self.frame, text = "Location:")
+        self.l4 = tk.Label(self.frame, text = "uploaded file", foreground = "green")
 
 
         # BUTTONS
@@ -94,7 +95,7 @@ class Menu3:
             text = 'Upload XLSX File',
             command = lambda:self.open_file()
         )
-        self.register_profile= tk.Button( # !!!!!! ADD VERIFICATION LABEL
+        self.register_profile= tk.Button( 
             self.frame,
             padx = 10,
             text = 'Register Profile',
@@ -108,7 +109,7 @@ class Menu3:
         self.user_prompt.grid(row = 0, column = 1, sticky = 'w', pady = 8)
         self.profile_name_prompt.grid(row = 1, column = 1, sticky = 'w', pady = 4)
         self.location_prompt.grid(row = 2, column = 1, sticky = 'w', pady = 4)
-        self.file_upload.grid(row = 3, column = 0, columnspan = 2, pady = 4)
+        self.file_upload.grid(row = 3, column = 0, pady = 4)
         self.register_profile.grid(row = 4, column = 0, columnspan = 2, pady = 4)
 
 
@@ -118,28 +119,10 @@ class Menu3:
     def open_file(self):
         file_name = askopenfilename()   # = askopenfile(mode = 'r', filetypes = [('xlsx Files', '*.xlsx')])
         if file_name is not None:
-            global file_path # !!!!! PRINT FILE SUCCESFULLY UPLOADED
+            global file_path 
             file_path = file_name # this is where we will call menu to process data and store in db
-            
-
-
-        # !!!! WORK ON THIS FUNCTION
-
-    # FOR CONFIRMING REGISTRATION
-    def registered(self):
-        self.newWindow = tk.Toplevel(self.master)
-        self.newWindow.title("!")
-        self.newWindow.geometry('200x100')
-        self.l4 = tk.Label(self.newWindow, text = "Profile Succesfully Registered")
-        self.l4.pack()
-
-
-
-
-
-
-
-        
+            self.l4.grid(row = 3, column = 1, sticky = 'w')
+                    
     # FOR CLOSING WINDOW AND SENDING DATA TO USER CLASS
     def quit(self):
         print(self.user_prompt.get())
