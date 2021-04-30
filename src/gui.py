@@ -120,31 +120,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-# #create a database or connect to one
-# conn = sqlite3.connect('user_hydroplanes.db')
-
-# #creating cursor instance
-# c = conn.cursor()
-
-# #creating cols for the database table
-# c.execute("""CREATE TABLE addresses (
-#     profile_name text,
-#     location text
-
-    
-#     )""")
-
-
-
-
-# #commit changes made
-# conn.commit()
-
-# #close connection
-# conn.close()
-
-# #text, integers, real, null, blob(img,vid)
