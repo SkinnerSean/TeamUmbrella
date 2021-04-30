@@ -1,10 +1,9 @@
-#import menu
+import users
 import tkinter as tk
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfilename #used for uploading file
-import users
 
-file_path = ' '
+file_path = " "
 
 # MENU1 IS THE MAIN MENU
 class Menu1:
@@ -12,7 +11,7 @@ class Menu1:
         # WINDOW PROPERTIES
         self.master = master
         self.master.title("TEAM UMBRELLA")
-        self.master.geometry('350x200')
+        self.master.geometry('400x250')
         self.frame = tk.Frame(self.master)
 
         # LABEL
@@ -25,26 +24,23 @@ class Menu1:
         self.button_view = tk.Button(
             self.frame,
             text = "VIEW",
-            width = 25,
-            height = 5,
-            bg = "grey",
+            padx = 50,
+            pady = 4,
             fg = "black",
             command = self.view_window
         )
         self.button_new = tk.Button(
             self.frame,
             text = "NEW",
-            width = 25,
-            height = 5,
-            bg = "grey",
-            fg = "black",
+            padx = 50,
+            pady = 4,
             command = self.new_window
         )
 
         # DISPLAY
-        self.title.pack()
-        self.button_view.pack()
-        self.button_new.pack()
+        self.title.grid(row = 0, column = 0, padx = 10, pady = 10)
+        self.button_view.grid(row = 1, column = 0, padx = 4, pady = 4)
+        self.button_new.grid(row = 2, column = 0, padx = 4, pady = 4)
         self.frame.pack()
 
     # FOR OPENING MENU2
@@ -80,37 +76,81 @@ class Menu3:
         self.master.geometry('350x200')
         self.frame = tk.Frame(self.master)
 
+        # INPUT PROMPTS
+        self.user_prompt = tk.Entry(self.frame)
+        self.profile_name_prompt = tk.Entry(self.frame)
+        self.location_prompt = tk.Entry(self.frame)
+
+        # LABELS
+        self.l1 = tk.Label(self.frame, text = "Username:")
+        self.l2 = tk.Label(self.frame, text = "Engine Profile Name:")
+        self.l3 = tk.Label(self.frame, text = "Location:")
+
+
         # BUTTONS
-        self.button_upload = tk.Button(
+        self.file_upload = tk.Button(
             self.frame,
+            padx = 20,
             text = 'Upload XLSX File',
             command = lambda:self.open_file()
         )
-        self.button_done= tk.Button(
+        self.register_profile= tk.Button( # !!!!!! ADD VERIFICATION LABEL
             self.frame,
-            text = 'DONE',
+            padx = 10,
+            text = 'Register Profile',
             command = self.quit
         )
 
         # DISPLAY
-        self.prompt = tk.Label(self.frame, text = "COLLECT CSV -> MENU -> USER -> PROCESS CSV INTO PROFILE")
-        self.prompt.pack()
-        self.button_upload.pack()
-        self.button_done.pack()
+        self.l1.grid(row = 0, column = 0, sticky = 'w')
+        self.l2.grid(row = 1, column = 0, sticky = 'w')
+        self.l3.grid(row = 2, column = 0, sticky = 'w')
+        self.user_prompt.grid(row = 0, column = 1, sticky = 'w', pady = 8)
+        self.profile_name_prompt.grid(row = 1, column = 1, sticky = 'w', pady = 4)
+        self.location_prompt.grid(row = 2, column = 1, sticky = 'w', pady = 4)
+        self.file_upload.grid(row = 3, column = 0, columnspan = 2, pady = 4)
+        self.register_profile.grid(row = 4, column = 0, columnspan = 2, pady = 4)
+
+
         self.frame.pack()
 
     # FOR UPLOADING FILE
     def open_file(self):
         file_name = askopenfilename()   # = askopenfile(mode = 'r', filetypes = [('xlsx Files', '*.xlsx')])
         if file_name is not None:
-            global file_path 
+            global file_path # !!!!! PRINT FILE SUCCESFULLY UPLOADED
             file_path = file_name # this is where we will call menu to process data and store in db
             
+
+
+        # !!!! WORK ON THIS FUNCTION
+
+    # FOR CONFIRMING REGISTRATION
+    def registered(self):
+        self.newWindow = tk.Toplevel(self.master)
+        self.newWindow.title("!")
+        self.newWindow.geometry('200x100')
+        self.l4 = tk.Label(self.newWindow, text = "Profile Succesfully Registered")
+        self.l4.pack()
+
+
+
+
+
+
+
         
-    # FOR CLOSING WINDOW
+    # FOR CLOSING WINDOW AND SENDING DATA TO USER CLASS
     def quit(self):
+        print(self.user_prompt.get())
+        print(self.profile_name_prompt.get())
+        print(self.location_prompt.get())
+        print(file_path)
+        # new_profile(self.user_prompt.get(), self.profile_name_prompt.get(), self.location_prompt.get(), global file_path)
         self.master.destroy()
-        # call new_profile with the file name 
+        
+
+
 
 # MAIN PROGRAM LOOP
 def main():
