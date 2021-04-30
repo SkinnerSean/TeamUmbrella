@@ -9,7 +9,6 @@ class Admin: # in gui have delete user and then prompt for user an key
         self.password = user_pw
 
     def __verify_password(self):
-       
         if self.password == self._key: 
             return True
         return False
