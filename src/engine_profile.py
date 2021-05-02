@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 
 class EngineProfile:
-    def __init__(self,name,loc,file):
-        self.name = name
+    def __init__(self,loc,file): # name is set in users
         self.location = loc
         self.stats = self.key_stats(file)
 
