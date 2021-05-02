@@ -5,6 +5,19 @@ from tkinter.filedialog import askopenfilename #used for uploading file
 
 file_path = " "
 
+# MENU 2
+# 
+#
+# ADD A FUNCTIONALITY TO EDIT A PROFILE
+
+
+
+# MENU 3
+# INCLUDE INPUT VALIDATION SO THERE ARE NO EMPTY FIELDS
+# LET USER KNOW IF THE FILE WAS SUCCESFULLY UPLOADED
+
+
+
 # MENU1 IS THE MAIN MENU
 class Menu1:
     def __init__(self, master):
@@ -59,13 +72,40 @@ class Menu2:
         # WINDOW PROPERTIES
         self.master = master
         self.master.title("HYDROPLANES")
-        self.master.geometry('350x200')
+        self.master.geometry('400x600')
         self.frame = tk.Frame(self.master)
 
+        # INPUT PROMPTS
+        self.user_prompt = tk.Entry(self.frame)
+
+
+        # LABELS
+        self.l1 = tk.Label(self.frame, text = "View Hydroplane Profiles for User:")
+
+        # BUTTONS
+        self.user_search = tk.Button(
+            self.frame,
+            padx = 5,
+            text = 'Search',
+            command = self.validateUser
+        )
+
+
         # DISPLAY
-        self.prompt = tk.Label(self.frame, text = "GUI->MENU->USERDATA")
-        self.prompt.pack()
+        self.l1.grid(row = 0, column = 0, sticky = 'w')
+        self.user_prompt.grid(row = 0, column = 1, sticky = 'w', pady = 8)
+        self.user_search.grid(row = 0, column = 2)
         self.frame.pack()
+
+    # FOR VALIDATING USER INPUT
+    def validateUser(self):
+        print("Validating user input....")
+        # if there is a user with name matching self.user_prompt.get()
+            # user found, continue with display
+        # else
+            # user not found, try again
+
+
 
 # MENU3 IS TO UPLOAD NEW PROFILE
 class Menu3:
@@ -82,54 +122,62 @@ class Menu3:
         self.location_prompt = tk.Entry(self.frame)
 
         # LABELS
-        self.l1 = tk.Label(self.frame, text = "Username:")
-        self.l2 = tk.Label(self.frame, text = "Engine Profile Name:")
-        self.l3 = tk.Label(self.frame, text = "Location:")
-        self.l4 = tk.Label(self.frame, text = "uploaded file", foreground = "green")
-
+        self.l1 = tk.Label(self.frame, text = "Username")
+        self.l2 = tk.Label(self.frame, text = "Engine Profile Name")
+        self.l3 = tk.Label(self.frame, text = "Location")
 
         # BUTTONS
         self.file_upload = tk.Button(
             self.frame,
             padx = 20,
             text = 'Upload XLSX File',
-            command = lambda:self.open_file()
+            command = lambda:self.openFile()
         )
         self.register_profile= tk.Button( 
             self.frame,
             padx = 10,
             text = 'Register Profile',
+            command = self.update_DB
+        )
+        self.exit_menu = tk.Button(
+            self.frame,
+            padx = 10,
+            text = "Done",
             command = self.quit
         )
 
         # DISPLAY
-        self.l1.grid(row = 0, column = 0, sticky = 'w')
-        self.l2.grid(row = 1, column = 0, sticky = 'w')
-        self.l3.grid(row = 2, column = 0, sticky = 'w')
+        self.l1.grid(row = 0, column = 0, sticky = 'w', padx = 5)
+        self.l2.grid(row = 1, column = 0, sticky = 'w', padx = 5)
+        self.l3.grid(row = 2, column = 0, sticky = 'w', padx = 5)
         self.user_prompt.grid(row = 0, column = 1, sticky = 'w', pady = 8)
         self.profile_name_prompt.grid(row = 1, column = 1, sticky = 'w', pady = 4)
         self.location_prompt.grid(row = 2, column = 1, sticky = 'w', pady = 4)
-        self.file_upload.grid(row = 3, column = 0, pady = 4)
+        self.file_upload.grid(row = 3, column = 0, columnspan = 2, pady = 4)
         self.register_profile.grid(row = 4, column = 0, columnspan = 2, pady = 4)
-
-
+        self.exit_menu.grid(row = 5, column = 0, columnspan = 2, pady = 10)
         self.frame.pack()
 
     # FOR UPLOADING FILE
-    def open_file(self):
+    def openFile(self):
         file_name = askopenfilename()   # = askopenfile(mode = 'r', filetypes = [('xlsx Files', '*.xlsx')])
-        if file_name is not None:
+        if file_name is not None: # this if conditional is always true !!!!
             global file_path 
-            file_path = file_name # this is where we will call menu to process data and store in db
-            self.l4.grid(row = 3, column = 1, sticky = 'w')
-                    
-    # FOR CLOSING WINDOW AND SENDING DATA TO USER CLASS
-    def quit(self):
+            file_path = file_name 
+
+    # FOR APPENDING NEW DATA INTO DATABASE
+    def update_DB(self):
         print(self.user_prompt.get())
         print(self.profile_name_prompt.get())
         print(self.location_prompt.get())
         print(file_path)
         # new_profile(self.user_prompt.get(), self.profile_name_prompt.get(), self.location_prompt.get(), global file_path)
+        self.user_prompt.delete(0, 'end')
+        self.profile_name_prompt.delete(0, 'end')
+        self.location_prompt.delete(0, 'end')
+
+    # FOR CLOSING WINDOW AND SENDING DATA TO USER CLASS
+    def quit(self):
         self.master.destroy()
         
 
