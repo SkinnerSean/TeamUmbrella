@@ -170,18 +170,12 @@ class Menu3:
 
     # FOR APPENDING NEW DATA INTO DATABASE
     def update_DB(self):
-        # print(self.user_prompt.get())
-        # print(self.profile_name_prompt.get())
-        # print(self.location_prompt.get())
-        # print(file_path)
         global file_path
         u = User(self.user_prompt.get())
         u.new_profile(self.profile_name_prompt.get(), self.location_prompt.get(), file_path)
         self.user_prompt.delete(0, 'end')
         self.profile_name_prompt.delete(0, 'end')
         self.location_prompt.delete(0, 'end')
-        # u = User(self.user_prompt)
-        # u.new_profile(self.profile_name_prompt,self.location_prompt,global file_path)
 
     # FOR CLOSING WINDOW AND SENDING DATA TO USER CLASS
     def quit(self):
