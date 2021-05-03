@@ -5,7 +5,6 @@ class EngineProfile:
     def __init__(self,loc,file): # name is set in users
         self.location = loc
         self.stats = self.key_stats(file)
-        print('fuck you')
 
     def process_file(self,excel_file):
         read_file = pd.read_excel(excel_file)

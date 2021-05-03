@@ -91,10 +91,13 @@ class Menu2:
         print("Validating user input....")
         print_profiles = ' '
         for name,stats in u.get_profiles_iterable():
+<<<<<<< HEAD
             print_profiles += f"Name: {name} - Location: {stats['location']}\nStats - {stats['stats']}\n\n"
 
         query_label = Label(self.frame, text = print_profiles)
         query_label.grid(row = 1, column = 0, columnspan = 2)
+=======
+>>>>>>> 2444975a1a058fbba8eb88ce9729b0bf7a7f2770
         # if there is a user with name matching self.user_prompt.get()
             # user found, continue with display
         # else
