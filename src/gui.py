@@ -101,6 +101,9 @@ class Menu2:
 
     # FOR VALIDATING USER INPUT
     def validateUser(self):
+        u = User(self.user_prompt.get())
+        
+        u.getProfiles()
         print("Validating user input....")
         # if there is a user with name matching self.user_prompt.get()
             # user found, continue with display
