@@ -41,8 +41,8 @@ class User: # create a new user w name then new_profile in gui
     """
         Returns the entire user database as key:value pairs
     """
-    def get_profiles(self):
-        return self.profiles_database.items() # returns a iterable with key:value pairs
+    def get_profiles_iterable(self):
+        return self.profiles_database.iteritems() # returns a iterable with key:value pairs
 
     """
         This adds a new profile into the database as a key:value pair so the data can be easily retrieved

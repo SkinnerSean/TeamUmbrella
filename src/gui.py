@@ -103,8 +103,9 @@ class Menu2:
     def validateUser(self):
         u = User(self.user_prompt.get())
         
-        u.getProfiles()
         print("Validating user input....")
+        for name,stats in u.get_profiles_iterable():
+            print(f'Name: {name} - Location: {stats['location']}\nStats - {stats['stats']]}')
         # if there is a user with name matching self.user_prompt.get()
             # user found, continue with display
         # else
