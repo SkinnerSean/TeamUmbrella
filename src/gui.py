@@ -5,19 +5,6 @@ from tkinter.filedialog import askopenfilename #used for uploading file
 
 file_path = " "
 
-# MENU 2
-# 
-#
-# ADD A FUNCTIONALITY TO EDIT A PROFILE
-
-
-
-# MENU 3
-# INCLUDE INPUT VALIDATION SO THERE ARE NO EMPTY FIELDS
-# LET USER KNOW IF THE FILE WAS SUCCESFULLY UPLOADED
-
-
-
 # MENU1 IS THE MAIN MENU
 class Menu1:
     def __init__(self, master):
@@ -74,12 +61,11 @@ class Menu2:
         # WINDOW PROPERTIES
         self.master = master
         self.master.title("HYDROPLANES")
-        self.master.geometry('400x600')
+        self.master.geometry('600x450')
         self.frame = tk.Frame(self.master)
 
         # INPUT PROMPTS
         self.user_prompt = tk.Entry(self.frame)
-
 
         # LABELS
         self.l1 = tk.Label(self.frame, text = "View Hydroplane Profiles for User:")
@@ -92,7 +78,6 @@ class Menu2:
             command = self.validateUser
         )
 
-
         # DISPLAY
         self.l1.grid(row = 0, column = 0, sticky = 'w')
         self.user_prompt.grid(row = 0, column = 1, sticky = 'w', pady = 8)
@@ -104,8 +89,12 @@ class Menu2:
         u = User(self.user_prompt.get())
         
         print("Validating user input....")
+        print_profiles = ' '
         for name,stats in u.get_profiles_iterable():
-            print(f'Name: {name} - Location: {stats['location']}\nStats - {stats['stats']]}')
+            print_profiles += f"Name: {name} - Location: {stats['location']}\nStats - {stats['stats']}\n\n"
+
+        query_label = Label(self.frame, text = print_profiles)
+        query_label.grid(row = 1, column = 0, columnspan = 2)
         # if there is a user with name matching self.user_prompt.get()
             # user found, continue with display
         # else
