@@ -49,11 +49,12 @@ class User: # create a new user w name then new_profile in gui
         and sent to the gui for display. Dictionaries are easy to work with in python so we are storing our
         new entries in a key:value database which are fast and efficient 
     """
-    def new_profile(self,name,location,file_name):
+    def new_profile(self,name,location,file):
+        print(name,location,file)
         if name in self.profiles_database.keys():
             print(f'{name} already in use!')
             return
-        self.profiles_database[name] = EngineProfile(name,location,file_name).__dict__ # serliazes the engine profile data and stores in db
+        self.profiles_database[name] = EngineProfile(location,file).__dict__ # serliazes the engine profile data and stores in db
 
     """
         Used in gui in the case where a user wants to delete an entry inside its own database

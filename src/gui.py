@@ -1,4 +1,4 @@
-import users
+from user import User
 import tkinter as tk
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfilename #used for uploading file
@@ -22,6 +22,7 @@ file_path = " "
 class Menu1:
     def __init__(self, master):
         # WINDOW PROPERTIES
+        self.users = [] # only works during run time cannot load profiles in yet
         self.master = master
         self.master.title("TEAM UMBRELLA")
         self.master.geometry('400x250')
@@ -59,16 +60,17 @@ class Menu1:
     # FOR OPENING MENU2
     def view_window(self):
         self.newWindow = tk.Toplevel(self.master)
-        self.app = Menu2(self.newWindow)
+        self.app = Menu2(self.newWindow,self.users)
 
     # FOR OPENING MENU3
     def new_window(self):
         self.newWindow = tk.Toplevel(self.master)
-        self.app = Menu3(self.newWindow)
+        self.app = Menu3(self.newWindow,self.users)
 
 # MENU2 IS TO VIEW PROFILES
 class Menu2:
-    def __init__ (self, master):
+    def __init__ (self, master,profiles):
+        self.users = profiles
         # WINDOW PROPERTIES
         self.master = master
         self.master.title("HYDROPLANES")
@@ -109,7 +111,8 @@ class Menu2:
 
 # MENU3 IS TO UPLOAD NEW PROFILE
 class Menu3:
-    def __init__ (self, master):
+    def __init__ (self, master,profiles):
+        self.users = profiles
         # WINDOW PROPERTIES
         self.master = master
         self.master.title("ADD HYROPLANE")
@@ -167,14 +170,18 @@ class Menu3:
 
     # FOR APPENDING NEW DATA INTO DATABASE
     def update_DB(self):
-        print(self.user_prompt.get())
-        print(self.profile_name_prompt.get())
-        print(self.location_prompt.get())
-        print(file_path)
-        # new_profile(self.user_prompt.get(), self.profile_name_prompt.get(), self.location_prompt.get(), global file_path)
+        # print(self.user_prompt.get())
+        # print(self.profile_name_prompt.get())
+        # print(self.location_prompt.get())
+        # print(file_path)
+        global file_path
+        u = User(self.user_prompt.get())
+        u.new_profile(self.profile_name_prompt.get(), self.location_prompt.get(), file_path)
         self.user_prompt.delete(0, 'end')
         self.profile_name_prompt.delete(0, 'end')
         self.location_prompt.delete(0, 'end')
+        # u = User(self.user_prompt)
+        # u.new_profile(self.profile_name_prompt,self.location_prompt,global file_path)
 
     # FOR CLOSING WINDOW AND SENDING DATA TO USER CLASS
     def quit(self):
